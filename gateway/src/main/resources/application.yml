@@ -1,0 +1,7 @@
+server.port: 8078
+spring:
+  application.name: GATEWAY
+eureka.client:
+  registerWithEureka: true
+  fetchRegistry: true
+  serviceUrl.defaultZone: http://localhost:8079/eureka
