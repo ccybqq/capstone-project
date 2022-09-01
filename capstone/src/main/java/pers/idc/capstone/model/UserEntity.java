@@ -3,6 +3,7 @@ package pers.idc.capstone.model;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -15,28 +16,36 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user_entity_details")
+@Table(
+        name = "user_entity_details",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "Email", columnNames = "email")
+        }
+)
 public class UserEntity {
     @Id
     @SequenceGenerator(name = "user_entity_sequence", allocationSize = 1)
     @GeneratedValue(generator = "user_entity_sequence", strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column(unique = true)
     private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
+    @Transient
+    private Long age;
     private Gender gender;
     private Float weight;
     private BloodGroup bloodGroup;
     private String contactNumber;
     private State state;
     private Area area;
-    private Integer postalCode;
+    private String postalCode;
 
-    public long getAge() {
-        return ChronoUnit.YEARS.between(dateOfBirth.toLocalDate(), LocalDate.now());
+    @PostPersist
+    @PostLoad
+    @PostUpdate
+    public void computeAge() {
+        setAge(ChronoUnit.YEARS.between(dateOfBirth.toLocalDate(), LocalDate.now()));
     }
 
     @Override

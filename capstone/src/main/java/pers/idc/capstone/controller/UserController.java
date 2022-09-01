@@ -4,15 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pers.idc.capstone.exception.IdNotNullException;
+import pers.idc.capstone.exception.UniqueConstraintViolationException;
 import pers.idc.capstone.model.UserEntity;
 import pers.idc.capstone.service.UserService;
 
 import javax.transaction.Transactional;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserService userService;
 
@@ -24,12 +25,9 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserEntity> register(@RequestBody UserEntity userEntity) {
         try {
-            return ResponseEntity.ok(userService.save(userEntity));
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return ResponseEntity.badRequest()
-                    .header("Message", "Email already in use.")
-                    .build();
-        } catch (IdNotNullException e) {
+            ResponseEntity<UserEntity> res = ResponseEntity.ok(userService.save(userEntity));
+            return res;
+        } catch (IdNotNullException | UniqueConstraintViolationException e) {
             return ResponseEntity.badRequest()
                     .header("Message", e.getMessage())
                     .build();
