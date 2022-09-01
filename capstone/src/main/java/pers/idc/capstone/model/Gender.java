@@ -1,4 +1,4 @@
-package pers.idc.capstone.entity;
+package pers.idc.capstone.model;
 
 public enum Gender {
     MALE("Male"),
