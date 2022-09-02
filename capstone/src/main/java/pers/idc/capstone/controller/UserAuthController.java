@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import pers.idc.capstone.exception.IdNotNullException;
 import pers.idc.capstone.exception.UniqueConstraintViolationException;
 import pers.idc.capstone.model.UserAuth;
 import pers.idc.capstone.service.UserAuthService;
@@ -33,7 +34,7 @@ public class UserAuthController {
     public ResponseEntity<UserAuth> register(@RequestBody UserAuth userAuth) {
         try {
             return ResponseEntity.ok(userAuthService.register(userAuth));
-        } catch (UniqueConstraintViolationException e) {
+        } catch (IdNotNullException | UniqueConstraintViolationException e) {
             return ResponseEntity.badRequest()
                     .header("Message", e.getMessage())
                     .build();

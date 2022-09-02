@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pers.idc.capstone.exception.IdNotNullException;
 import pers.idc.capstone.exception.UniqueConstraintViolationException;
 import pers.idc.capstone.model.UserAuth;
 import pers.idc.capstone.repo.UserAuthRepository;
@@ -44,6 +45,8 @@ public class UserAuthService implements UserDetailsService {
     }
 
     public UserAuth register(UserAuth userAuth) {
+        // Non-null id risks overwriting another entry.
+        if (userAuth.getUserEntity().getId() != null) throw new IdNotNullException();
         // Email must be unique.
         String email = userAuth.getUserEntity().getEmail();
         if (userRepository.findByEmail(email).isPresent()) throw new UniqueConstraintViolationException("Email", email);
