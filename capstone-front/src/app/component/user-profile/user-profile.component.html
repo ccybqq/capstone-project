@@ -1,4 +1,32 @@
-<p>user-profile works!</p>
 <div class="display" *ngIf="userEntity != null">
-    {{ userEntity.email }}
+  <div class="container">
+    <h1>{{ userEntity.firstName }} {{ userEntity.lastName }}</h1>
+    <div class="email">{{ userEntity.email }}</div>
+    <div class="cols">
+      <div class="col1">
+        <label>Age: </label>
+        <div class="value">{{ userEntity.age }}</div>
+        <br>
+        <label>Blood Group: </label>
+        <div class="value">{{ userEntity.bloodGroup }}</div>
+        <br>
+        <label>State: </label>
+        <div class="value">{{ userEntity.state }}</div>
+        <br>
+        <label>Postal Code: </label>
+        <div class="value">{{ userEntity.postalCode }}</div>
+      </div>
+      <div class="col2">
+        <label>Gender: </label>
+        <div class="value">{{ userEntity.gender }}</div>
+        <br>
+        <label>Weight: </label>
+        <div class="value">{{ userEntity.weight }}</div>
+        <br>
+        <label>Area: </label>
+        <div class="value">{{ userEntity.area }}</div>
+        <br>
+      </div>
+    </div>
+  </div>
 </div>

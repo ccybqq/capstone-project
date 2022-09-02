@@ -13,7 +13,10 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(
+        origins = "http://localhost:4200",
+        exposedHeaders = "Message"
+)
 public class UserController {
     private final UserService userService;
 
@@ -48,7 +51,9 @@ public class UserController {
     @GetMapping
     public ResponseEntity<UserEntity> findByEmail(@RequestParam String email) {
         try {
-            return ResponseEntity.ok(userService.findByEmail(email));
+            return ResponseEntity.ok()
+                    .header("Message", "User found.")
+                    .body(userService.findByEmail(email));
         } catch (NoSuchElementException e) {
             return ResponseEntity.badRequest()
                     .header("Message", "User not found.")
