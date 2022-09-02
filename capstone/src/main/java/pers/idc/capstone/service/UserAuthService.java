@@ -39,7 +39,7 @@ public class UserAuthService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User does not exist."));
     }
 
-    public UserAuth getByEmail(String email) {
+    public UserAuth findByEmail(String email) {
         return userAuthRepository.findByEmail(email)
                 .orElseThrow(NoSuchElementException::new);
     }

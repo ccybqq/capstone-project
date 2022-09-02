@@ -26,8 +26,8 @@ public class UserAuthController {
     }
 
     @GetMapping
-    public ResponseEntity<UserAuth> getById(@RequestParam("email") String email) {
-        return ResponseEntity.ok(userAuthService.getByEmail(email));
+    public ResponseEntity<UserAuth> findByEmail(@RequestParam("email") String email) {
+        return ResponseEntity.ok(userAuthService.findByEmail(email));
     }
 
     @PostMapping
