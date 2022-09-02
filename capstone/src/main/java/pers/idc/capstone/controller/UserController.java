@@ -51,6 +51,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('user:read')")
     public ResponseEntity<UserEntity> findByEmail(@RequestParam String email) {
         try {
             return ResponseEntity.ok()

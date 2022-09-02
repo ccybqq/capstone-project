@@ -1,0 +1,26 @@
+<div class="container">
+    <h3>Login</h3>
+    <form (ngSubmit)="login()">
+      <label class="form-label">Username: </label>
+      <input
+        class="form-field"
+        type="text"
+        autocomplete="off"
+        name="usernm"
+        [(ngModel)]="userAuthRequest.username"
+      />
+      <br />
+      <label class="form-label">Password:  </label>
+      <input
+        class="form-field"
+        type="text"
+        autocomplete="off"
+        name="passwd"
+        [(ngModel)]="userAuthRequest.password"
+      />
+      <br />
+      <p>No account? Register <a href="/register">here</a>.</p>
+      <button type="submit">Login</button>
+    </form>
+    <button (click)="logout()">Logout</button>
+  </div>

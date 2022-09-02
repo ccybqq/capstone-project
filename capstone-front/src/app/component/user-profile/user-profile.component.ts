@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Gender } from 'src/app/objects/gender';
-import { UserEntity } from 'src/app/objects/user-entity';
+import { Gender } from 'src/app/object/gender';
+import { UserEntity } from 'src/app/object/user-entity';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.getUser("jean.smith@mymail.com");
+    this.getUser("default");
   }
 
   public getUser(email: string): void {
