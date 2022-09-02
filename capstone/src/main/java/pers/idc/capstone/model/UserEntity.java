@@ -3,8 +3,8 @@ package pers.idc.capstone.model;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -22,7 +22,7 @@ import java.util.Objects;
                 @UniqueConstraint(name = "Email", columnNames = "email")
         }
 )
-public class UserEntity {
+public class UserEntity implements Serializable {
     @Id
     @SequenceGenerator(name = "user_entity_sequence", allocationSize = 1)
     @GeneratedValue(generator = "user_entity_sequence", strategy = GenerationType.SEQUENCE)
