@@ -2,6 +2,7 @@ package pers.idc.capstone.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pers.idc.capstone.exception.IdNotNullException;
 import pers.idc.capstone.exception.UniqueConstraintViolationException;
@@ -26,10 +27,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserEntity> register(@RequestBody UserEntity userEntity) {
+    @PreAuthorize("hasAuthority('user:write')")
+    public ResponseEntity<UserEntity> save(@RequestBody UserEntity userEntity) {
         try {
-            ResponseEntity<UserEntity> res = ResponseEntity.ok(userService.save(userEntity));
-            return res;
+            return ResponseEntity.ok(userService.save(userEntity));
         } catch (IdNotNullException | UniqueConstraintViolationException e) {
             return ResponseEntity.badRequest()
                     .header("Message", e.getMessage())
@@ -38,6 +39,7 @@ public class UserController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('user:write')")
     public ResponseEntity<UserEntity> update(@RequestBody UserEntity userEntity) {
         try {
             return ResponseEntity.ok(userService.update(userEntity));
@@ -63,6 +65,7 @@ public class UserController {
 
     @DeleteMapping
     @Transactional
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<UserEntity> deleteByEmail(@RequestParam String email) {
         userService.deleteByEmail(email);
         return ResponseEntity.ok().build();

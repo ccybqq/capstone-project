@@ -2,7 +2,9 @@ package pers.idc.capstone.jwt;
 
 import com.google.common.net.HttpHeaders;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @ConfigurationProperties(prefix = "application.jwt")
 public class JwtConfig {
     private String secretKey;
@@ -25,8 +27,8 @@ public class JwtConfig {
         this.tokenPrefix = tokenPrefix;
     }
 
-    public String getTokenExpirationAfterDays() {
-        return tokenExpirationAfterDays;
+    public int getTokenExpirationAfterDays() {
+        return Integer.parseInt(tokenExpirationAfterDays);
     }
 
     public void setTokenExpirationAfterDays(String tokenExpirationAfterDays) {

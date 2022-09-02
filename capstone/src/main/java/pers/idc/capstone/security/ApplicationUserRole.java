@@ -12,7 +12,7 @@ import static pers.idc.capstone.security.ApplicationUserPermission.USER_WRITE;
 
 public enum ApplicationUserRole {
     BASIC(Sets.newHashSet(USER_READ)),
-    ADMIN(Sets.newHashSet(USER_WRITE));
+    ADMIN(Sets.newHashSet(USER_READ, USER_WRITE));
 
     private Set<ApplicationUserPermission> permissions;
 

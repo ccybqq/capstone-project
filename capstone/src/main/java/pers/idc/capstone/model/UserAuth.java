@@ -25,7 +25,7 @@ public class UserAuth implements UserDetails {
     @JoinColumn(name = "email", referencedColumnName = "email")
     private UserEntity userEntity;
     private String password;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "granted_authority")
     @CollectionTable(name = "user_auth_table_granted_authorities", joinColumns = @JoinColumn(name = "owner_id"))
     private Set<GrantedAuthority> authorities;
