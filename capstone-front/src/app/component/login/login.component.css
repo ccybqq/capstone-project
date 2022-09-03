@@ -1,0 +1,60 @@
+.display {
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 8px 0 black;
+    background-color: rgb(255, 252, 238);
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.col1, .col2{
+    width: 48%;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.col1 {
+    text-align: right;
+    float: left;
+}
+
+.col1 .contents {
+    max-width: fit-content;
+}
+
+.col2 {
+    float: left;
+}
+
+label {
+    font-size: 19px;
+}
+
+.login p {
+    padding-left: 10%;
+    font-size: 13px;
+}
+
+.login input {
+    width: 150px;
+}
+
+.login-group {
+    text-align: center;
+    justify-content: center;
+}
+
+.logout-button {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile-button {
+    text-align: center;
+}

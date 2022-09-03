@@ -9,14 +9,17 @@ import { UserAuthRequest } from '../object/user-auth-request';
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(userAuthRequest: UserAuthRequest): Observable<HttpResponse<UserAuth>> {
-    return this.http.post('http://localhost:8080/login', userAuthRequest, { observe: 'response' });
+    return this.http.post<UserAuth>(this.baseUrl + '/login', userAuthRequest, { observe: 'response' });
   }
 
-  // TODO: register()
+  register(userAuth: UserAuth): Observable<HttpResponse<UserAuth>> {
+    return this.http.post<UserAuth>(this.baseUrl + '/api/auth', userAuth, { observe: 'response' });
+  }
 
   isLoggedIn() {
     return localStorage.getItem('username') !== null;

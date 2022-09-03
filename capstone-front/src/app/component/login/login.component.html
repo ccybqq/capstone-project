@@ -1,26 +1,50 @@
-<div class="container">
-    <h3>Login</h3>
+<div class="display">
+  <div class="login" *ngIf="!authService.isLoggedIn()">
+    <h1>Log In</h1>
     <form (ngSubmit)="login()">
-      <label class="form-label">Username: </label>
-      <input
-        class="form-field"
-        type="text"
-        autocomplete="off"
-        name="usernm"
-        [(ngModel)]="userAuthRequest.username"
-      />
-      <br />
-      <label class="form-label">Password:  </label>
-      <input
-        class="form-field"
-        type="text"
-        autocomplete="off"
-        name="passwd"
-        [(ngModel)]="userAuthRequest.password"
-      />
-      <br />
-      <p>No account? Register <a href="/register">here</a>.</p>
-      <button type="submit">Login</button>
+      <div class="col1">
+        <div class="content">
+          <label for="user">Username: </label><br />
+          <label for="pass">Password: </label>
+        </div>
+      </div>
+      <div class="col2">
+        <div class="content">
+          <input
+            type="text"
+            autocomplete="off"
+            name="username"
+            id="user"
+            [(ngModel)]="userAuthRequest.username"
+          />
+          <br />
+          <input
+            type="password"
+            autocomplete="off"
+            name="password"
+            id="pass"
+            [(ngModel)]="userAuthRequest.password"
+          />
+        </div>
+        <br>
+      </div>
+      <div class="login-group">
+        <button type="submit">Login</button><br>
+        <div *ngIf="hasFailed" style="color:red">
+          Username/password incorrect. Please try again.
+        </div>
+      </div>
     </form>
-    <button (click)="logout()">Logout</button>
+    <br />
+    <p>No account? Register <a href="/register">here</a>.</p>
   </div>
+  <div *ngIf="authService.isLoggedIn()">
+    <h1>Logged In</h1>
+    <div class="profile-button">
+      <button (click)="router.navigate(['profile'])">User Profile</button>
+    </div>
+    <div class="logout-button">
+      <button (click)="logout()">Logout</button><br>
+    </div>
+  </div>
+</div>

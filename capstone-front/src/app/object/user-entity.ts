@@ -4,17 +4,17 @@ import { Gender } from "./gender";
 import { State } from "./state";
 
 export interface UserEntity {
-    id: number,
-    email: string,
-    firstName: string,
-    lastName: string,
-    dateOfBirth: string,
-    age: number,
-    gender: Gender,
-    weight: number,
-    bloodGroup: BloodGroup,
-    contactNumber: String,
-    state: State,
-    area: Area,
-    postalCode: number
+    id: number | null,
+    email: string | null,
+    firstName: string | null,
+    lastName: string | null,
+    dateOfBirth: string | null,
+    age: number | null,
+    gender: Gender | null,
+    weight: number | null,
+    bloodGroup: BloodGroup | null,
+    contactNumber: String | null,
+    state: State | null,
+    area: Area | null,
+    postalCode: number | null
 }

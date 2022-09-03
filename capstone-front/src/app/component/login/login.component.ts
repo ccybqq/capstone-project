@@ -15,8 +15,9 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   }
+  hasFailed: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(protected authService: AuthService, protected router: Router) { }
 
   ngOnInit(): void {
   }
@@ -28,9 +29,13 @@ export class LoginComponent implements OnInit {
           console.log(response.headers.get('authorization')); // DEBUG
           let jwt: string = response.headers.get('authorization') ?? '';
           localStorage.setItem("jwt", jwt);
+          console.log(response);
+
+          localStorage.setItem("username", this.userAuthRequest.username);
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
+          this.hasFailed = true
         }
       }
     );

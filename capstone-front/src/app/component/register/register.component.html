@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="register" *ngIf="!authService.isLoggedIn()">
+    <h1>Register</h1>
+    <form class="cols" (ngSubmit)="register()">
+      <div class="col1">
+        <div class="contents">
+          <label>First Name: </label><br>
+          <input class="value" name="firstName" type="text" tabindex="1" [(ngModel)]="userAuth.userEntity.firstName">
+          <br />
+          <label>Email: </label><br>
+          <input class="value" name="email" type="text" tabindex="3" [(ngModel)]="userAuth.userEntity.email">
+          <br />
+          <label>Date of Birth: </label><br>
+          <input class="value" name="Date" type="date" tabindex="5" [(ngModel)]="userAuth.userEntity.dateOfBirth">
+          <br />
+          <label>Blood Group: </label><br>
+          <select class="value" name="bloodGroup" tabindex="7" [(ngModel)]="userAuth.userEntity.bloodGroup">
+            <option *ngFor="let option of object.values(bloodGroup)" [value]="option">
+              {{option}}
+            </option>
+          </select>
+          <br />
+          <label>State: </label><br>
+          <select class="value" name="state" tabindex="9" [(ngModel)]="userAuth.userEntity.state">
+            <option *ngFor="let option of object.values(state)" [value]="option">
+              {{option}}
+            </option>
+          </select>
+          <br />
+          <label>Postal Code: </label><br>
+          <input class="value" name="postalCode" type="number" tabindex="11" [(ngModel)]="userAuth.userEntity.postalCode">
+        </div>
+      </div>
+      <div class="col2">
+        <div class="contents">
+          <label>Last Name: </label><br>
+          <input class="value" name="lastName" type="text" tabindex="2" [(ngModel)]="userAuth.userEntity.lastName">
+          <br />
+          <label>Password: </label><br>
+          <input class="value" name="password" type="password" tabindex="4" [(ngModel)]="userAuth.password">
+          <br />
+          <label>Gender: </label><br>
+          <select class="value" name="gender" tabindex="6" [(ngModel)]="userAuth.userEntity.gender">
+            <option *ngFor="let option of object.values(gender)" [value]="option">
+              {{option}}
+            </option>
+          </select>
+          <br />
+          <label>Weight: </label><br>
+          <input class="value" name="weight" type="number" tabindex="8" [(ngModel)]="userAuth.userEntity.weight">
+          <br />
+          <label>Area: </label><br>
+          <select class="value" name="area" tabindex="10" [(ngModel)]="userAuth.userEntity.area">
+            <option *ngFor="let option of object.values(area)" [value]="option">
+              {{option}}
+            </option>
+          </select>
+          <br />
+          <label>Contact Number: </label><br>
+          <input class="value" name="contactNumber" type="text" tabindex="11" [(ngModel)]="userAuth.userEntity.contactNumber">
+          <br />
+          <br>
+          <div class="button-group">
+              <button type="submit">Register</button>
+              <button (click)="router.navigate(['login'])">Back to Login</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

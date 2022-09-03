@@ -1,32 +1,40 @@
-<div class="display" *ngIf="userEntity != null">
-  <div class="container">
+<div class="display">
+  <div class="container" *ngIf="userEntity != null">
     <h1>{{ userEntity.firstName }} {{ userEntity.lastName }}</h1>
-    <div class="email">{{ userEntity.email }}</div>
+    <div class="sub">{{ userEntity.email }}</div>
     <div class="cols">
       <div class="col1">
         <label>Age: </label>
         <div class="value">{{ userEntity.age }}</div>
-        <br>
+        <br />
         <label>Blood Group: </label>
         <div class="value">{{ userEntity.bloodGroup }}</div>
-        <br>
+        <br />
         <label>State: </label>
         <div class="value">{{ userEntity.state }}</div>
-        <br>
+        <br />
         <label>Postal Code: </label>
         <div class="value">{{ userEntity.postalCode }}</div>
       </div>
       <div class="col2">
         <label>Gender: </label>
-        <div class="value">{{ userEntity.gender }}</div>
-        <br>
+        <div class="value">{{ userEntity.gender!.toString() }}</div>
+        <br />
         <label>Weight: </label>
         <div class="value">{{ userEntity.weight }}</div>
-        <br>
+        <br />
         <label>Area: </label>
         <div class="value">{{ userEntity.area }}</div>
-        <br>
+        <br />
+        <label>Contact Number: </label>
+        <div class="value">{{ userEntity.contactNumber }}</div>
+        <br />
       </div>
     </div>
+    <br>
+    <div style="padding-left: 5%;">
+      <button (click)="router.navigate(['login'])">Session</button>
+    </div>
+    <br>
   </div>
 </div>
