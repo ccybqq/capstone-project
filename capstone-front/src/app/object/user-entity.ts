@@ -11,5 +11,5 @@ export interface UserEntity {
     contactNumber: String,
     state: string,
     area: string,
-    postalCode: number
+    pinCode: number
 }

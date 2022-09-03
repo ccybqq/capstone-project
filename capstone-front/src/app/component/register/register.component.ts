@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
       contactNumber: '',
       state: '',
       area: '',
-      postalCode: 0
+      pinCode: 0
     }
   };
 

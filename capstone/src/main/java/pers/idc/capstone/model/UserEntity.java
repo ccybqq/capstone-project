@@ -39,7 +39,7 @@ public class UserEntity implements Serializable {
     private String contactNumber;
     private State state;
     private Area area;
-    private String postalCode;
+    private Integer pinCode;
 
     @PostPersist
     @PostLoad

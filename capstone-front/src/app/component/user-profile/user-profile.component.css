@@ -2,7 +2,6 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0 4px 8px 0 black;
-    max-width: 500px;
     background-color: rgb(255, 252, 238);
     overflow: hidden;
 }
@@ -18,14 +17,20 @@ h1 {
 }
 
 .col1, .col2{
-    width: 45%;
-    padding-left: 5%;
+    width: 46%;
+    padding-left: 2%;
+    padding-right: 2%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .col1 {
     float: left;
+}
+
+.col1 .content {
+    width: fit-content;
+    float: right;
 }
 
 .col2 {
