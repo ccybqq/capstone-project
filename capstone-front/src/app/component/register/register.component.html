@@ -15,14 +15,14 @@
           <br />
           <label>Blood Group: </label><br>
           <select class="value" name="bloodGroup" tabindex="7" [(ngModel)]="userAuth.userEntity.bloodGroup">
-            <option *ngFor="let option of object.values(bloodGroup)" [value]="option">
+            <option *ngFor="let option of formatter.bloodGroup.values()" [value]="option">
               {{option}}
             </option>
           </select>
           <br />
           <label>State: </label><br>
           <select class="value" name="state" tabindex="9" [(ngModel)]="userAuth.userEntity.state">
-            <option *ngFor="let option of object.values(state)" [value]="option">
+            <option *ngFor="let option of formatter.state.values()" [value]="option">
               {{option}}
             </option>
           </select>
@@ -41,7 +41,7 @@
           <br />
           <label>Gender: </label><br>
           <select class="value" name="gender" tabindex="6" [(ngModel)]="userAuth.userEntity.gender">
-            <option *ngFor="let option of object.values(gender)" [value]="option">
+            <option *ngFor="let option of formatter.gender.values()" [value]="option">
               {{option}}
             </option>
           </select>
@@ -51,7 +51,7 @@
           <br />
           <label>Area: </label><br>
           <select class="value" name="area" tabindex="10" [(ngModel)]="userAuth.userEntity.area">
-            <option *ngFor="let option of object.values(area)" [value]="option">
+            <option *ngFor="let option of formatter.area.values()" [value]="option">
               {{option}}
             </option>
           </select>

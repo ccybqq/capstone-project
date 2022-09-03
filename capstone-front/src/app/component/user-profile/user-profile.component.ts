@@ -1,11 +1,8 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Area } from 'src/app/object/area';
-import { BloodGroup } from 'src/app/object/blood-group';
-import { Gender } from 'src/app/object/gender';
-import { State } from 'src/app/object/state';
 import { UserEntity } from 'src/app/object/user-entity';
+import { FormatterService } from 'src/app/service/formatter.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -16,7 +13,7 @@ import { UserService } from 'src/app/service/user.service';
 export class UserProfileComponent implements OnInit {
   public userEntity!: UserEntity | null;
 
-  constructor(private userService: UserService, protected router: Router) { }
+  constructor(private userService: UserService, protected router: Router, protected formatter: FormatterService) { }
 
   ngOnInit(): void {
     let username: string | null = localStorage.getItem('username');
@@ -29,15 +26,11 @@ export class UserProfileComponent implements OnInit {
       {
         next: (response: HttpResponse<UserEntity>) => {
           this.userEntity = response.body;
-          var x = <Gender> this.userEntity!.gender;
-          var y = Gender.MALE;
-          var z = x === y;
-          console.log(z);
-          console.log(<Gender> this.userEntity!.gender);
-          this.userEntity!.gender = <Gender> this.userEntity!.gender;
-          this.userEntity!.bloodGroup = <BloodGroup> this.userEntity!.bloodGroup;
-          this.userEntity!.state = <State> this.userEntity!.state;
-          this.userEntity!.area = <Area> this.userEntity!.area;
+          console.log(this.userEntity);
+          this.userEntity!.gender = this.formatter.backToFront(this.userEntity!.gender, this.formatter.gender);
+          this.userEntity!.bloodGroup = this.formatter.backToFront(this.userEntity!.bloodGroup, this.formatter.bloodGroup);
+          this.userEntity!.state = this.formatter.backToFront(this.userEntity!.state, this.formatter.state);
+          this.userEntity!.area = this.formatter.backToFront(this.userEntity!.area, this.formatter.area);
           console.log(this.userEntity);
         },
         error: (e: HttpErrorResponse) => {

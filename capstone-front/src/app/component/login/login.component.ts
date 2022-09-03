@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.userAuthRequest).subscribe(
       {
         next: (response: HttpResponse<UserAuth>) => {
-          console.log(response.headers.get('authorization')); // DEBUG
+          //console.log(response.headers.get('authorization')); // DEBUG
           let jwt: string = response.headers.get('authorization') ?? '';
           localStorage.setItem("jwt", jwt);
-          console.log(response);
+          //console.log(response);
 
           localStorage.setItem("username", this.userAuthRequest.username);
         },

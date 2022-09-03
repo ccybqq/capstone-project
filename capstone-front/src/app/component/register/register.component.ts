@@ -1,10 +1,6 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Area } from 'src/app/object/area';
-import { BloodGroup } from 'src/app/object/blood-group';
-import { Gender } from 'src/app/object/gender';
-import { State } from 'src/app/object/state';
 import { UserAuth } from 'src/app/object/user-auth';
 import { AuthService } from 'src/app/service/auth.service';
 import { FormatterService } from 'src/app/service/formatter.service';
@@ -20,36 +16,31 @@ export class RegisterComponent implements OnInit {
     password: '',
     userEntity: {
       id: null,
-      email: null,
-      firstName: null,
-      lastName: null,
-      dateOfBirth: null,
-      age: null,
-      gender: null,
-      weight: null,
-      bloodGroup: null,
-      contactNumber: null,
-      state: null,
-      area: null,
-      postalCode: null
+      email: '',
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      age: 0,
+      gender: '',
+      weight: 0,
+      bloodGroup: '',
+      contactNumber: '',
+      state: '',
+      area: '',
+      postalCode: 0
     }
   };
-  gender = Gender;
-  bloodGroup = BloodGroup;
-  state = State;
-  area = Area;
-  object = Object;
 
-  constructor(protected authService: AuthService, protected router: Router, private formatter: FormatterService) { }
+  constructor(protected authService: AuthService, protected router: Router, protected formatter: FormatterService) { }
 
   ngOnInit(): void {
   }
 
   register(): void {
-    this.userAuth.userEntity.gender = <Gender> this.formatter.valueToKey(<string> this.userAuth.userEntity.gender!, Gender);
-    this.userAuth.userEntity.bloodGroup = <BloodGroup> this.formatter.valueToKey(<string> this.userAuth.userEntity.bloodGroup!, BloodGroup);
-    this.userAuth.userEntity.state = <State> this.formatter.valueToKey(<string> this.userAuth.userEntity.state!, State);
-    this.userAuth.userEntity.area = <Area> this.formatter.valueToKey(<string> this.userAuth.userEntity.area!, Area);
+    this.userAuth.userEntity.gender = this.formatter.frontToBack(this.userAuth.userEntity.gender!, this.formatter.gender);
+    this.userAuth.userEntity.bloodGroup = this.formatter.frontToBack(this.userAuth.userEntity.bloodGroup!, this.formatter.bloodGroup);
+    this.userAuth.userEntity.state = this.formatter.frontToBack(this.userAuth.userEntity.state!, this.formatter.state);
+    this.userAuth.userEntity.area = this.formatter.frontToBack(this.userAuth.userEntity.area!, this.formatter.area);
 
     console.log("Sending registration details...");
     console.log(this.userAuth);
@@ -60,7 +51,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['login']);
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.log(error.headers.get('Message'));
         }
       }
     )
