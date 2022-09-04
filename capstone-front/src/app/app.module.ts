@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
+import { BloodSearchComponent } from './component/blood-search/blood-search.component';
+import { BloodRequestComponent } from './component/blood-request/blood-request.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BloodSearchComponent,
+    BloodRequestComponent
   ],
   imports: [
     BrowserModule,

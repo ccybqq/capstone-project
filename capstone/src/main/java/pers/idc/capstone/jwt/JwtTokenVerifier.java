@@ -44,7 +44,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         }
 
         String token = authorizationHeader.replace(jwtConfig.getTokenPrefix(), "");
-        System.out.println(token);
 
         try {
             Jws<Claims> claimsJws = Jwts.parserBuilder()
@@ -68,7 +67,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
             );
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            System.out.println("Successful auth.");
         } catch (JwtException e) {
             throw new IllegalStateException("Invalid token " + token);
         }

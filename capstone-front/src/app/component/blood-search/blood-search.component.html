@@ -1,0 +1,103 @@
+<div class="container">
+  <div style="padding-left: 10px; padding-top: 5px;">
+    <button (click)="router.navigate(['login'])">Session</button>
+  </div>
+  <h1>Blood Search</h1>
+  <div class="body">
+    <div class="search-box">
+      <form class="content" (ngSubmit)="search()" ngNativeValidate>
+        <label>Blood Group: </label><br />
+        <select
+          class="value"
+          name="bloodGroup"
+          tabindex="1"
+          [(ngModel)]="bloodRegistryEntity.bloodGroup"
+          required
+        >
+          <option
+            *ngFor="let option of formatter.bloodGroup.values()"
+            [value]="option"
+          >
+            {{ option }}
+          </option>
+        </select>
+        <br />
+        <label>State: </label><br />
+        <select
+          class="value"
+          name="state"
+          tabindex="2"
+          [(ngModel)]="bloodRegistryEntity.state"
+          required
+        >
+          <option
+            *ngFor="let option of formatter.state.values()"
+            [value]="option"
+          >
+            {{ option }}
+          </option>
+        </select>
+        <br />
+        <label>Area: </label><br />
+        <select
+          class="value"
+          name="area"
+          tabindex="4"
+          [(ngModel)]="bloodRegistryEntity.area"
+          required
+        >
+          <option
+            *ngFor="let option of formatter.area.values()"
+            [value]="option"
+          >
+            {{ option }}
+          </option>
+        </select>
+        <br />
+        <label>PIN Code: </label><br />
+        <input
+          class="value"
+          name="pinCode"
+          type="number"
+          tabindex="11"
+          [(ngModel)]="bloodRegistryEntity.pinCode"
+          required
+        />
+        <br />
+        <br />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div class="result" *ngIf="result.id != null">
+      <div class="col1">
+        <label>Blood Group: </label>
+        <div class="value">{{ result.bloodGroup }}</div>
+      </div>
+      <div class="col2">
+        <label>State: </label>
+        <div class="value">{{ result.state }}</div>
+        <br />
+        <label>Area: </label>
+        <div class="value">{{ result.area }}</div>
+        <br />
+        <label>PIN Code: </label>
+        <div class="value">{{ result.pinCode }}</div>
+        <br />
+      </div>
+    </div>
+    <div class="result" *ngIf="result.id == null && hasFailedSearch == true">
+      <div class="not-found">
+        <h2 class="failed-message">No record found.</h2>
+        <br />
+        <div class="request-button">
+          <button (click)="router.navigate(['request'])">Request</button>
+        </div>
+        <div class="add-button" *ngIf="isAdmin">
+          <button (click)="router.navigate(['registry/add'])">
+            Admin: Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

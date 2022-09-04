@@ -7,7 +7,7 @@ import { UserEntity } from '../object/user-entity';
   providedIn: 'root'
 })
 export class UserService {
-  private apiServerUrl = 'http://localhost:8080/api/user'
+  private apiServerUrl = 'http://localhost:8080/api/user';
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,6 @@ export class UserService {
     params = params.set('email', email)
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', localStorage.getItem('jwt') ?? '')
-    console.log(headers.get('Authorization'));
     let response = this.http.get<UserEntity>(this.apiServerUrl, { observe: 'response', params, headers});
     return response;
   }

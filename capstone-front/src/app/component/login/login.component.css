@@ -49,12 +49,7 @@ label {
     justify-content: center;
 }
 
-.logout-button {
+.menu-button {
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.profile-button {
-    text-align: center;
+    padding: 2px;
 }

@@ -1,63 +1,63 @@
 <div class="container">
   <div class="register" *ngIf="!authService.isLoggedIn()">
     <h1>Register</h1>
-    <form class="cols" (ngSubmit)="register()">
+    <form class="cols" (ngSubmit)="register()" ngNativeValidation>
       <div class="col1">
         <div class="contents">
           <label>First Name: </label><br>
-          <input class="value" name="firstName" type="text" tabindex="1" [(ngModel)]="userAuth.userEntity.firstName">
+          <input class="value" name="firstName" type="text" tabindex="1" [(ngModel)]="userAuth.userEntity.firstName" required>
           <br />
           <label>Email: </label><br>
-          <input class="value" name="email" type="text" tabindex="3" [(ngModel)]="userAuth.userEntity.email">
+          <input class="value" name="email" type="text" tabindex="3" [(ngModel)]="userAuth.userEntity.email" required>
           <br />
           <label>Date of Birth: </label><br>
-          <input class="value" name="Date" type="date" tabindex="5" [(ngModel)]="userAuth.userEntity.dateOfBirth">
+          <input class="value" name="Date" type="date" tabindex="5" [(ngModel)]="userAuth.userEntity.dateOfBirth" required>
           <br />
           <label>Blood Group: </label><br>
-          <select class="value" name="bloodGroup" tabindex="7" [(ngModel)]="userAuth.userEntity.bloodGroup">
+          <select class="value" name="bloodGroup" tabindex="7" [(ngModel)]="userAuth.userEntity.bloodGroup" required>
             <option *ngFor="let option of formatter.bloodGroup.values()" [value]="option">
               {{option}}
             </option>
           </select>
           <br />
           <label>State: </label><br>
-          <select class="value" name="state" tabindex="9" [(ngModel)]="userAuth.userEntity.state">
+          <select class="value" name="state" tabindex="9" [(ngModel)]="userAuth.userEntity.state" required>
             <option *ngFor="let option of formatter.state.values()" [value]="option">
               {{option}}
             </option>
           </select>
           <br />
           <label>PIN Code: </label><br>
-          <input class="value" name="pinCode" type="number" tabindex="11" [(ngModel)]="userAuth.userEntity.pinCode">
+          <input class="value" name="pinCode" type="number" tabindex="11" [(ngModel)]="userAuth.userEntity.pinCode" required>
         </div>
       </div>
       <div class="col2">
         <div class="contents">
           <label>Last Name: </label><br>
-          <input class="value" name="lastName" type="text" tabindex="2" [(ngModel)]="userAuth.userEntity.lastName">
+          <input class="value" name="lastName" type="text" tabindex="2" [(ngModel)]="userAuth.userEntity.lastName" required>
           <br />
           <label>Password: </label><br>
-          <input class="value" name="password" type="password" tabindex="4" [(ngModel)]="userAuth.password">
+          <input class="value" name="password" type="password" tabindex="4" [(ngModel)]="userAuth.password" required>
           <br />
           <label>Gender: </label><br>
-          <select class="value" name="gender" tabindex="6" [(ngModel)]="userAuth.userEntity.gender">
+          <select class="value" name="gender" tabindex="6" [(ngModel)]="userAuth.userEntity.gender" required>
             <option *ngFor="let option of formatter.gender.values()" [value]="option">
               {{option}}
             </option>
           </select>
           <br />
           <label>Weight: </label><br>
-          <input class="value" name="weight" type="number" tabindex="8" [(ngModel)]="userAuth.userEntity.weight">
+          <input class="value" name="weight" type="number" tabindex="8" [(ngModel)]="userAuth.userEntity.weight" required>
           <br />
           <label>Area: </label><br>
-          <select class="value" name="area" tabindex="10" [(ngModel)]="userAuth.userEntity.area">
+          <select class="value" name="area" tabindex="10" [(ngModel)]="userAuth.userEntity.area" required>
             <option *ngFor="let option of formatter.area.values()" [value]="option">
               {{option}}
             </option>
           </select>
           <br />
           <label>Contact Number: </label><br>
-          <input class="value" name="contactNumber" type="text" tabindex="11" [(ngModel)]="userAuth.userEntity.contactNumber">
+          <input class="value" name="contactNumber" type="text" tabindex="11" [(ngModel)]="userAuth.userEntity.contactNumber" required>
           <br />
           <br>
           <div class="button-group">

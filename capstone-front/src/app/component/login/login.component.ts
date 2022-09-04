@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuth } from 'src/app/object/user-auth';
 import { UserAuthRequest } from 'src/app/object/user-auth-request';
+import { UserEntity } from 'src/app/object/user-entity';
 import { AuthService } from 'src/app/service/auth.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
   hasFailed: boolean = false;
 
-  constructor(protected authService: AuthService, protected router: Router) { }
+  constructor(protected authService: AuthService, private userService: UserService, protected router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,12 +28,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.userAuthRequest).subscribe(
       {
         next: (response: HttpResponse<UserAuth>) => {
-          //console.log(response.headers.get('authorization')); // DEBUG
           let jwt: string = response.headers.get('authorization') ?? '';
           localStorage.setItem("jwt", jwt);
-          //console.log(response);
 
-          localStorage.setItem("username", this.userAuthRequest.username);
+          this.setAdmin(this.userAuthRequest.username);
+          this.setProfileDetails(this.userAuthRequest.username);
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
@@ -42,8 +43,36 @@ export class LoginComponent implements OnInit {
   }
 
   logout(): void {
-    console.log("logout called.");
     this.authService.logout();
+  }
+
+  setProfileDetails(email: string) {
+    this.userService.getUserByEmail(email).subscribe(
+      {
+        next: (response: HttpResponse<UserEntity>) => {
+          let user: UserEntity = response.body!;
+          localStorage.setItem("username", user.email);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.headers.get('Message'));
+        }
+      }
+    )
+  }
+
+  setAdmin(email: string) {
+    this.authService.checkAdmin(email).subscribe(
+      {
+        next: (response: boolean) => {
+          localStorage.setItem('isAdmin', String(response));
+        }
+      }
+    );
+    
+  }
+
+  isAdmin(): boolean {
+    return localStorage.getItem('isAdmin') === 'true';
   }
 
 }

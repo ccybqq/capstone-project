@@ -29,10 +29,12 @@ public class UserService {
     }
 
     public UserEntity update(UserEntity userEntity) {
-        if (
-                userEntity.getId() == null ||
-                userRepository.findById(userEntity.getId()).isEmpty()
-        ) throw new NoSuchElementException("Id not specified or user does not exist.");
+        // Email must be unique.
+        String email = userEntity.getEmail();
+        if (userRepository.findByEmail(email).isPresent()) throw new UniqueConstraintViolationException("Email", email);
+
+        userRepository.findById(userEntity.getId())
+                .orElseThrow(() -> new NoSuchElementException("User does not exist."));
         return userRepository.save(userEntity);
     }
 
