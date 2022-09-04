@@ -1,0 +1,87 @@
+.container {
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 8px 0 black;
+    background-color: rgb(255, 252, 238);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+h1, h2 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.required-container, .review-container {
+    background-color: beige;
+    box-shadow: 0 4px 8px 0 black;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
+}
+
+.review-form , .review {
+    background-color: rgb(239, 239, 201);
+    box-shadow: 0 4px 8px 0 black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.r1 {
+    display: flex;
+}
+
+.r1-c1, .r1-c2 {
+    flex: 1;
+}
+
+.r1-c3 {
+    flex: 0.1
+}
+
+.r3 {
+    display: flex;
+}
+
+.review-container label {
+    font-size: small;
+    font-style: italic;
+}
+
+.review-message {
+    flex: 1
+}
+
+.required {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.required-detail {
+    background-color: rgb(239, 239, 201);
+    box-shadow: 0 4px 8px 0 black;
+    padding: 10px;
+    display: flex;
+}
+
+.col1, .col2 {
+    flex: 1;
+}
+
+.required-detail label {
+    font-size: small;
+}
+
+.required-detail .value {
+    color: rgb(71, 71, 71);
+    font-weight: bold;
+}

@@ -1,7 +1,7 @@
 <div class="display">
   <div class="container" *ngIf="userEntity != null">
     <div style="padding-left: 10px; padding-top: 5px;">
-      <button (click)="router.navigate(['login'])">Session</button>
+      <button (click)="router.navigate(['login'])">Dashboard</button>
     </div>
     <h1>{{ userEntity.firstName }} {{ userEntity.lastName }}</h1>
     <div class="sub">{{ userEntity.email }}</div>
@@ -38,7 +38,5 @@
         </div>
       </div>
     </div>
-    <br />
-    <br />
   </div>
 </div>

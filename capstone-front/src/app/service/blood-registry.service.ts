@@ -40,4 +40,8 @@ export class BloodRegistryService {
     headers = headers.append('Authorization', localStorage.getItem('jwt') ?? '')
     return this.http.delete<BloodRegistryEntity>(this.apiServerUrl, { observe: 'response', headers, params});
   }
+
+  public getAllRequired(): Observable<HttpResponse<BloodRegistryEntity[]>> {
+    return this.http.get<BloodRegistryEntity[]>(this.apiServerUrl, { observe: 'response' });
+  }
 }

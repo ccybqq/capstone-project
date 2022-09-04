@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
 
           this.setAdmin(this.userAuthRequest.username);
           this.setProfileDetails(this.userAuthRequest.username);
+          this.router.navigate(['home']);
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);

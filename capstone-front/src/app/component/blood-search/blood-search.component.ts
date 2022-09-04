@@ -36,6 +36,7 @@ export class BloodSearchComponent implements OnInit {
 
   protected hasFailedSearch: boolean = false;
   protected isAdmin: boolean = false;
+  protected hasSubmittedRequest = false;
 
   constructor(
     private bloodRegistryService: BloodRegistryService,
@@ -50,6 +51,7 @@ export class BloodSearchComponent implements OnInit {
   }
 
   search() {
+    this.hasSubmittedRequest = false;
     this.bloodRegistryService.getBloodRegistryEntity(this.reqObj()).subscribe(
       {
         next: (response: HttpResponse<BloodRegistryEntity>) => {
@@ -113,6 +115,7 @@ export class BloodSearchComponent implements OnInit {
   addRequest() {
     if (this.result.id != null) this.makeRequest();
     else this.add(false, true);
+    this.hasSubmittedRequest = true;
   }
 
   private add(available: boolean, required: boolean) {

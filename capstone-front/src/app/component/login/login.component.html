@@ -29,7 +29,8 @@
         <br>
       </div>
       <div class="login-group">
-        <button type="submit">Login</button><br>
+        <button type="submit">Login</button>
+        <br>
         <div *ngIf="hasFailed" style="color:red">
           Username/password incorrect. Please try again.
         </div>
@@ -42,6 +43,9 @@
     <h1>Logged In</h1>
     <div class="menu-button">
       <button (click)="router.navigate(['profile'])">User Profile</button>
+    </div>
+    <div class="menu-button">
+      <button (click)="router.navigate(['home'])">Home</button>
     </div>
     <div class="menu-button">
       <button (click)="router.navigate(['search'])">Search</button><br>

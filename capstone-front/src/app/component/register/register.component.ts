@@ -37,20 +37,32 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.userAuth.userEntity.gender = this.formatter.frontToBack(this.userAuth.userEntity.gender!, this.formatter.gender);
-    this.userAuth.userEntity.bloodGroup = this.formatter.frontToBack(this.userAuth.userEntity.bloodGroup!, this.formatter.bloodGroup);
-    this.userAuth.userEntity.state = this.formatter.frontToBack(this.userAuth.userEntity.state!, this.formatter.state);
-    this.userAuth.userEntity.area = this.formatter.frontToBack(this.userAuth.userEntity.area!, this.formatter.area);
-
-    console.log("Sending registration details...");
-    console.log(this.userAuth);
-    this.authService.register(this.userAuth).subscribe(
+    let newUser: UserAuth = {
+      password: this.userAuth.password,
+      userEntity: {
+        id: this.userAuth.userEntity.id,
+        email: this.userAuth.userEntity.email,
+        firstName: this.userAuth.userEntity.firstName,
+        lastName: this.userAuth.userEntity.lastName,
+        dateOfBirth: this.userAuth.userEntity.dateOfBirth,
+        age: this.userAuth.userEntity.age,
+        gender: this.formatter.frontToBack(this.userAuth.userEntity.gender!, this.formatter.gender),
+        weight: this.userAuth.userEntity.weight,
+        bloodGroup: this.formatter.frontToBack(this.userAuth.userEntity.bloodGroup!, this.formatter.bloodGroup),
+        contactNumber: this.userAuth.userEntity.contactNumber,
+        state: this.formatter.frontToBack(this.userAuth.userEntity.state!, this.formatter.state),
+        area: this.formatter.frontToBack(this.userAuth.userEntity.area!, this.formatter.area),
+        pinCode: this.userAuth.userEntity.pinCode
+      }
+    };
+    this.authService.register(newUser).subscribe(
       {
         next: (response: HttpResponse<UserAuth>) => {
-          console.log("User registered.");
+          alert("User created successfully. Please log in.");
           this.router.navigate(['login']);
         },
         error: (error: HttpErrorResponse) => {
+          alert("Email already in use.")
           console.log(error.headers.get('Message'));
         }
       }

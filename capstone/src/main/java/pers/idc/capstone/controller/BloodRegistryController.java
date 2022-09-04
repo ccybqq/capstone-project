@@ -9,6 +9,7 @@ import pers.idc.capstone.exception.UniqueConstraintViolationException;
 import pers.idc.capstone.model.BloodRegistryEntity;
 import pers.idc.capstone.service.BloodRegistryService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -19,6 +20,12 @@ public class BloodRegistryController {
     @Autowired
     public BloodRegistryController(BloodRegistryService bloodRegistryService) {
         this.bloodRegistryService = bloodRegistryService;
+    }
+
+    @GetMapping
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<List<BloodRegistryEntity>> getAllRequired() {
+        return ResponseEntity.ok(bloodRegistryService.findAllRequired());
     }
 
     @PostMapping("/get")
@@ -34,7 +41,7 @@ public class BloodRegistryController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_BASIC', 'ROLE_ADMIN')")
     public ResponseEntity<BloodRegistryEntity> add(@RequestBody BloodRegistryEntity bloodRegistryEntity) {
         try {
             return ResponseEntity.ok(bloodRegistryService.save(bloodRegistryEntity));

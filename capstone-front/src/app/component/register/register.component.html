@@ -1,7 +1,7 @@
 <div class="container">
   <div class="register" *ngIf="!authService.isLoggedIn()">
     <h1>Register</h1>
-    <form class="cols" (ngSubmit)="register()" ngNativeValidation>
+    <form class="cols" (ngSubmit)="register()" ngNativeValidate>
       <div class="col1">
         <div class="contents">
           <label>First Name: </label><br>
@@ -47,7 +47,7 @@
           </select>
           <br />
           <label>Weight: </label><br>
-          <input class="value" name="weight" type="number" tabindex="8" [(ngModel)]="userAuth.userEntity.weight" required>
+          <input class="value" name="weight" type="number" step="0.1" min="0" tabindex="8" [(ngModel)]="userAuth.userEntity.weight" required>
           <br />
           <label>Area: </label><br>
           <select class="value" name="area" tabindex="10" [(ngModel)]="userAuth.userEntity.area" required>

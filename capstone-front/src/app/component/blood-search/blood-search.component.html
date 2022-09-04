@@ -1,6 +1,6 @@
 <div class="container">
   <div style="padding-left: 10px; padding-top: 5px">
-    <button (click)="router.navigate(['login'])">Session</button>
+    <button (click)="router.navigate(['login'])">Dashboard</button>
   </div>
   <h1>Blood Search</h1>
   <div class="body">
@@ -112,7 +112,9 @@
           </div>
         </ng-template>
         <ng-template #request>
-          <div class="request-button">A Request has been made.</div>
+          A request has been made.
+          <br>
+          <div *ngIf="hasSubmittedRequest">Your blood requirements have been posted successfully on the home page.</div>
           <br>
           <div class="admin-button" *ngIf="isAdmin">
             <button (click)="makeAvailable()">Admin: Make Available</button>
