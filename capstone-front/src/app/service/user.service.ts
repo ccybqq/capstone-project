@@ -13,7 +13,7 @@ export class UserService {
 
   public getUserByEmail(email: string): Observable<HttpResponse<UserEntity>> {
     let params = new HttpParams();
-    params = params.set('email', email)
+    params = params.set('email', email);
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', localStorage.getItem('jwt') ?? '')
     let response = this.http.get<UserEntity>(this.apiServerUrl, { observe: 'response', params, headers});

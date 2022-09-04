@@ -70,9 +70,15 @@ public class BloodRegistryService {
     }
 
     // Update only, does not persist.
-    public BloodRegistryEntity update(BloodRegistryEntity bloodRegistryEntity) {
-        long id = findBySpecification(bloodRegistryEntity).getId();
-        bloodRegistryEntity.setId(id);
+    public BloodRegistryEntity update(long id, boolean available, boolean required) {
+        BloodRegistryEntity bloodRegistryEntity = bloodRegistryRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Blood record not found."));
+        bloodRegistryEntity.setAvailable(available);
+        bloodRegistryEntity.setRequired(required);
         return bloodRegistryRepository.save(bloodRegistryEntity);
+    }
+
+    public void deleteById(long id) {
+        bloodRegistryRepository.deleteById(id);
     }
 }

@@ -50,31 +50,118 @@ export class BloodSearchComponent implements OnInit {
   }
 
   search() {
-    this.bloodRegistryEntity.bloodGroup = this.formatter.frontToBack(this.bloodRegistryEntity.bloodGroup, this.formatter.bloodGroup);
-    this.bloodRegistryEntity.state = this.formatter.frontToBack(this.bloodRegistryEntity.state, this.formatter.state);
-    this.bloodRegistryEntity.area = this.formatter.frontToBack(this.bloodRegistryEntity.area, this.formatter.area);
-    this.bloodRegistryService.getBloodRegistryEntity(this.bloodRegistryEntity).subscribe(
+    this.bloodRegistryService.getBloodRegistryEntity(this.reqObj()).subscribe(
       {
         next: (response: HttpResponse<BloodRegistryEntity>) => {
-          this.result = response.body ?? this.result;
-          this.result.bloodGroup = this.formatter.backToFront(this.result.bloodGroup, this.formatter.bloodGroup);
-          this.result.state = this.formatter.backToFront(this.result.state, this.formatter.state);
-          this.result.area = this.formatter.backToFront(this.result.area, this.formatter.area);
+          this.setResultFromResponse(response);
         },
         error: (error: HttpErrorResponse) => {
           this.hasFailedSearch = true;
-          this.result = {
-            id: null,
-            bloodGroup: '',
-            state: '',
-            area: '',
-            pinCode: '',
-            required: false,
-            available: false
-          };
+          this.initResult();
           console.log(error.headers.get('Message'));
         }
       }
     );
+  }
+
+  makeRequest() {
+    this.update(this.result.id ?? 0, this.result.available, true);
+  }
+
+  unmakeRequest() {
+    this.update(this.result.id ?? 0, this.result.available, false);
+  }
+
+  makeAvailable() {
+    this.update(this.result.id ?? 0, true, this.result.required);
+  }
+
+  unmakeAvailable() {
+    this.update(this.result.id ?? 0, false, this.result.required);
+  }
+
+  private update(id: number, available: boolean, required: boolean): void {
+    this.bloodRegistryService.update(id, available, required).subscribe(
+      {
+        next: (response: HttpResponse<BloodRegistryEntity>) => {
+          this.setResultFromResponse(response);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.headers.get('Message'));
+        }
+      }
+    )
+  }
+
+  delete() {
+    this.bloodRegistryService.delete(this.result.id!).subscribe(
+      {
+        next: () => {
+          this.initResult();
+          this.hasFailedSearch = true;
+        },
+        error: (error: HttpErrorResponse) => console.log(error.headers.get('Message'))
+      }
+    );
+  }
+
+  addAvailable() {
+    if (this.result.id != null) this.makeAvailable();
+    else this.add(true, false);
+  }
+  
+  addRequest() {
+    if (this.result.id != null) this.makeRequest();
+    else this.add(false, true);
+  }
+
+  private add(available: boolean, required: boolean) {
+    let req: BloodRegistryEntity = this.reqObj();
+    req.available = available;
+    req.required = required;
+    this.bloodRegistryService.add(req).subscribe(
+      {
+        next: (response: HttpResponse<BloodRegistryEntity>) => {
+          this.setResultFromResponse(response);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.headers.get('Message'));
+        }
+      }
+    );
+  }
+  
+  private reqObj(): BloodRegistryEntity {
+    return {
+      id: null,
+      bloodGroup: this.formatter.frontToBack(this.bloodRegistryEntity.bloodGroup, this.formatter.bloodGroup),
+      state: this.formatter.frontToBack(this.bloodRegistryEntity.state, this.formatter.state),
+      area: this.formatter.frontToBack(this.bloodRegistryEntity.area, this.formatter.area),
+      pinCode: this.bloodRegistryEntity.pinCode,
+      required: false,
+      available: false
+    }
+  };
+
+  private setResultFromResponse(response: HttpResponse<BloodRegistryEntity>): void {
+    this.result = response.body ?? this.result;
+    this.result.bloodGroup = this.formatter.backToFront(this.result.bloodGroup, this.formatter.bloodGroup);
+    this.result.state = this.formatter.backToFront(this.result.state, this.formatter.state);
+    this.result.area = this.formatter.backToFront(this.result.area, this.formatter.area);
+    console.log(this.result);
+    if (this.result.available == true) this.hasFailedSearch = false;
+    else this.hasFailedSearch = true;
+  }
+
+  private initResult(): void {
+    this.result = {
+      id: null,
+      bloodGroup: '',
+      state: '',
+      area: '',
+      pinCode: '',
+      required: false,
+      available: false
+    };
   }
 }

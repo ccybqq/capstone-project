@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="padding-left: 10px; padding-top: 5px;">
+  <div style="padding-left: 10px; padding-top: 5px">
     <button (click)="router.navigate(['login'])">Session</button>
   </div>
   <h1>Blood Search</h1>
@@ -68,35 +68,57 @@
         <button type="submit">Search</button>
       </form>
     </div>
-    <div class="result" *ngIf="result.id != null">
-      <div class="col1">
-        <label>Blood Group: </label>
-        <div class="value">{{ result.bloodGroup }}</div>
+    <div class="result" *ngIf="result.available == true">
+      <h2 class="result-header">Available!</h2>
+      <br />
+      <div class="result-body">
+        <div class="col1">
+          <label>Blood Group: </label>
+          <div class="value">{{ result.bloodGroup }}</div>
+        </div>
+        <div class="col2">
+          <label>State: </label>
+          <div class="value">{{ result.state }}</div>
+          <br />
+          <label>Area: </label>
+          <div class="value">{{ result.area }}</div>
+          <br />
+          <label>PIN Code: </label>
+          <div class="value">{{ result.pinCode }}</div>
+          <br />
+        </div>
       </div>
-      <div class="col2">
-        <label>State: </label>
-        <div class="value">{{ result.state }}</div>
-        <br />
-        <label>Area: </label>
-        <div class="value">{{ result.area }}</div>
-        <br />
-        <label>PIN Code: </label>
-        <div class="value">{{ result.pinCode }}</div>
-        <br />
+      <div class="result-buttons">
+        <div class="admin-button" *ngIf="isAdmin">
+          <button (click)="unmakeAvailable()">Admin: Make Unvailable</button>
+          <br />
+          <button (click)="delete()">Admin: Delete Record</button>
+        </div>
       </div>
     </div>
-    <div class="result" *ngIf="result.id == null && hasFailedSearch == true">
+    <div
+      class="result"
+      *ngIf="result.available == false && hasFailedSearch == true"
+    >
       <div class="not-found">
-        <h2 class="failed-message">No record found.</h2>
-        <br />
-        <div class="request-button">
-          <button (click)="router.navigate(['request'])">Request</button>
-        </div>
-        <div class="add-button" *ngIf="isAdmin">
-          <button (click)="router.navigate(['registry/add'])">
-            Admin: Add
-          </button>
-        </div>
+        <h2 class="failed-message">Unavailable.</h2>
+        <div *ngIf="result.required; then request; else no_request"></div>
+        <ng-template #no_request>
+          <div class="request-button">
+            <button (click)="addRequest()">Request</button>
+          </div>
+          <div class="add-button" *ngIf="isAdmin">
+            <button (click)="addAvailable()">Admin: Make Available</button>
+          </div>
+        </ng-template>
+        <ng-template #request>
+          <div class="request-button">A Request has been made.</div>
+          <br>
+          <div class="admin-button" *ngIf="isAdmin">
+            <button (click)="makeAvailable()">Admin: Make Available</button>
+            <button (click)="unmakeRequest()">Admin: Delete Request</button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

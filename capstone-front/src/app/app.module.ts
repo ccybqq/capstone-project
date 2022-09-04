@@ -9,7 +9,6 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { BloodSearchComponent } from './component/blood-search/blood-search.component';
-import { BloodRequestComponent } from './component/blood-request/blood-request.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { BloodRequestComponent } from './component/blood-request/blood-request.c
     LoginComponent,
     RegisterComponent,
     BloodSearchComponent,
-    BloodRequestComponent
   ],
   imports: [
     BrowserModule,

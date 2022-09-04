@@ -3,10 +3,7 @@ package pers.idc.capstone.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pers.idc.capstone.exception.IdNotNullException;
 import pers.idc.capstone.exception.UniqueConstraintViolationException;
 import pers.idc.capstone.model.BloodRegistryEntity;
@@ -46,5 +43,27 @@ public class BloodRegistryController {
                     .header("Message", e.getMessage())
                     .build();
         }
+    }
+
+    @PutMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<BloodRegistryEntity> update(
+            @RequestParam("id") long id,
+            @RequestParam("available") boolean available,
+            @RequestParam("required") boolean required) {
+        try {
+            return ResponseEntity.ok(bloodRegistryService.update(id, available, required));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest()
+                    .header("Message", e.getMessage())
+                    .build();
+        }
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<BloodRegistryEntity> delete(@RequestParam long id) {
+        bloodRegistryService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

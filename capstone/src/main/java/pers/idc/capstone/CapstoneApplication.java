@@ -59,9 +59,23 @@ public class CapstoneApplication {
 		bloodRegistryEntity.setRequired(false);
 		bloodRegistryService.save(bloodRegistryEntity);
 
-		System.out.println("=================================");
-		bloodRegistryRepository.findByBloodGroupAndStateAndAreaAndPinCode(AB_P, STATE_A, AREA_1, 123123)
-				.ifPresent(System.out::println);
-		System.out.println("=================================");
+
+		bloodRegistryEntity = new BloodRegistryEntity();
+		bloodRegistryEntity.setBloodGroup(AB_P);
+		bloodRegistryEntity.setState(STATE_A);
+		bloodRegistryEntity.setArea(AREA_1);
+		bloodRegistryEntity.setPinCode(123124);
+		bloodRegistryEntity.setAvailable(false);
+		bloodRegistryEntity.setRequired(false);
+		bloodRegistryService.save(bloodRegistryEntity);
+
+		bloodRegistryEntity = new BloodRegistryEntity();
+		bloodRegistryEntity.setBloodGroup(AB_P);
+		bloodRegistryEntity.setState(STATE_A);
+		bloodRegistryEntity.setArea(AREA_1);
+		bloodRegistryEntity.setPinCode(123125);
+		bloodRegistryEntity.setAvailable(false);
+		bloodRegistryEntity.setRequired(true);
+		bloodRegistryService.save(bloodRegistryEntity);
 	}
 }
