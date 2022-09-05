@@ -13,6 +13,7 @@ import pers.idc.capstone.repo.UserAuthRepository;
 import pers.idc.capstone.repo.UserRepository;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import static pers.idc.capstone.security.ApplicationUserRole.ADMIN;
 import static pers.idc.capstone.security.ApplicationUserRole.BASIC;
@@ -63,7 +64,7 @@ public class UserAuthService implements UserDetailsService {
     public void makeAdmin(long id) {
         UserAuth user = userAuthRepository.findById(id)
                 .orElseThrow(NoSuchElementException::new);
-        user.setAuthorities(ADMIN.getGrantedAuthorities());
+        user.getAuthorities().addAll(ADMIN.getGrantedAuthorities());
         userAuthRepository.save(user);
     }
 }
