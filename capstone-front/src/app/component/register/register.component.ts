@@ -31,6 +31,8 @@ export class RegisterComponent implements OnInit {
     }
   };
 
+  isAdmin: boolean = false;
+
   constructor(protected authService: AuthService, protected router: Router, protected formatter: FormatterService) { }
 
   ngOnInit(): void {
@@ -55,9 +57,18 @@ export class RegisterComponent implements OnInit {
         pinCode: this.userAuth.userEntity.pinCode
       }
     };
+
     this.authService.register(newUser).subscribe(
       {
         next: (response: HttpResponse<UserAuth>) => {
+          if (this.isAdmin) {
+            this.authService.makeAdmin(response.body!.userEntity.id!).subscribe(
+              {
+                next: () => console.log("admin"),
+                error: (e: HttpErrorResponse) => console.log(e)
+              }
+            );
+          }
           alert("User created successfully. Please log in.");
           this.router.navigate(['login']);
         },

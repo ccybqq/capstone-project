@@ -28,6 +28,10 @@ h1 {
     float: left;
 }
 
+input:invalid {
+    border-color: red;
+}
+
 .col1 .contents {
     max-width: fit-content;
     float: right;

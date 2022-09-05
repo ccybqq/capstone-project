@@ -21,6 +21,10 @@ export class AuthService {
     return this.http.post<UserAuth>(this.apiServerUrl + '/api/auth', userAuth, { observe: 'response' });
   }
 
+  makeAdmin(id: number): Observable<HttpResponse<UserAuth>> {
+    return this.http.put<HttpResponse<UserAuth>>(this.apiServerUrl + "/api/auth/" + id, { observe: 'response' });
+  }
+
   checkAdmin(email: string): Observable<boolean> {
     let params = new HttpParams();
     params = params.set('email', email)

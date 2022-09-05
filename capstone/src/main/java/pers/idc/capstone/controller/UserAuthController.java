@@ -51,11 +51,11 @@ public class UserAuthController {
         }
     }
 
-    @PutMapping("/admin")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<UserAuth> makeAdmin(long id) {
+    @PutMapping("/{id}")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<UserAuth> makeAdmin(@PathVariable("id") String id) {
         try {
-            userAuthService.makeAdmin(id);
+            userAuthService.makeAdmin(Long.parseLong(id));
         } catch (NoSuchElementException e) {
             return ResponseEntity.badRequest().build();
         }

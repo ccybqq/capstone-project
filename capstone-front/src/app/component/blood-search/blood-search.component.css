@@ -24,6 +24,10 @@ h1 {
     padding: 1%;
 }
 
+input:invalid {
+    border-color: red;
+}
+
 label {
     font-size: 12px;
 }

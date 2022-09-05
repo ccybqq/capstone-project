@@ -41,7 +41,7 @@ public class BloodRegistryController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ROLE_BASIC', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_BASIC', 'ROLE_ADMIN')")
     public ResponseEntity<BloodRegistryEntity> add(@RequestBody BloodRegistryEntity bloodRegistryEntity) {
         try {
             return ResponseEntity.ok(bloodRegistryService.save(bloodRegistryEntity));

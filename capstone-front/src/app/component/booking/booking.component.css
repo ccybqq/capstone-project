@@ -27,6 +27,10 @@ h1, h2 {
     gap: 8px;
 }
 
+input:invalid {
+    border-color: red;
+}
+
 .c1 .c2 {
     flex: 1;
     display: flex;

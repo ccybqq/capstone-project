@@ -9,6 +9,10 @@
     padding: 15px;
 }
 
+input:invalid, textarea:invalid {
+    border-color: red;
+}
+
 h1, h2 {
     text-align: center;
     font-weight: bold;
