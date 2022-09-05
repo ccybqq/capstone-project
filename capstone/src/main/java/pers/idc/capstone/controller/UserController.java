@@ -43,9 +43,9 @@ public class UserController {
     public ResponseEntity<UserEntity> update(@RequestBody UserEntity userEntity) {
         try {
             return ResponseEntity.ok(userService.update(userEntity));
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | IllegalArgumentException e) {
             return ResponseEntity.badRequest()
-                    .header("Message", "User does not exist.")
+                    .header("Message", e.getMessage())
                     .build();
         }
     }

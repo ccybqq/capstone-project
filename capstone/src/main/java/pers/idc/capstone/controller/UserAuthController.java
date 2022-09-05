@@ -3,6 +3,7 @@ package pers.idc.capstone.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pers.idc.capstone.exception.IdNotNullException;
@@ -30,6 +31,12 @@ public class UserAuthController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<UserAuth> findByEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(userAuthService.findByEmail(email));
+    }
+
+    @GetMapping("/isAdmin")
+    @PreAuthorize("hasAuthority('user:read')")
+    public ResponseEntity<Boolean> isAdmin(@RequestParam("email") String email) {
+        return ResponseEntity.ok(userAuthService.isAdmin(email));
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package pers.idc.capstone.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -66,5 +67,19 @@ public class UserAuthService implements UserDetailsService {
                 .orElseThrow(NoSuchElementException::new);
         user.getAuthorities().addAll(ADMIN.getGrantedAuthorities());
         userAuthRepository.save(user);
+    }
+
+    public boolean isAdmin(String email) {
+        try {
+            long count = findByEmail(email)
+                    .getAuthorities()
+                    .stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .filter(s -> s.equals("ROLE_ADMIN"))
+                    .count();
+            return count > 0;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }
