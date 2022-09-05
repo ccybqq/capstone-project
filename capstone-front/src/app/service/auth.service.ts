@@ -9,16 +9,16 @@ import { UserAuthRequest } from '../object/user-auth-request';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl: string = 'http://localhost:8080';
+  private apiServerUrl: string = 'http://localhost:8080';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(userAuthRequest: UserAuthRequest): Observable<HttpResponse<UserAuth>> {
-    return this.http.post<UserAuth>(this.baseUrl + '/login', userAuthRequest, { observe: 'response' });
+    return this.http.post<UserAuth>(this.apiServerUrl + '/login', userAuthRequest, { observe: 'response' });
   }
 
   register(userAuth: UserAuth): Observable<HttpResponse<UserAuth>> {
-    return this.http.post<UserAuth>(this.baseUrl + '/api/auth', userAuth, { observe: 'response' });
+    return this.http.post<UserAuth>(this.apiServerUrl + '/api/auth', userAuth, { observe: 'response' });
   }
 
   checkAdmin(email: string): Observable<boolean> {
@@ -26,7 +26,7 @@ export class AuthService {
     params = params.set('email', email)
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', localStorage.getItem('jwt') ?? '')
-    return this.http.get<boolean>(this.baseUrl + '/api/auth/isAdmin', { params, headers });
+    return this.http.get<boolean>(this.apiServerUrl + '/api/auth/isAdmin', { params, headers });
   }
 
   isAdmin(): boolean {

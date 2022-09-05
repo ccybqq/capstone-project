@@ -81,4 +81,8 @@ public class BloodRegistryService {
     public void deleteById(long id) {
         bloodRegistryRepository.deleteById(id);
     }
+
+    public List<BloodRegistryEntity> findAllRequired() {
+        return bloodRegistryRepository.findAllByRequired(true);
+    }
 }

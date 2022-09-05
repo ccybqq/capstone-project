@@ -6,6 +6,7 @@ import pers.idc.capstone.model.BloodGroup;
 import pers.idc.capstone.model.BloodRegistryEntity;
 import pers.idc.capstone.model.State;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BloodRegistryRepository extends JpaRepository<BloodRegistryEntity, Long> {
@@ -23,8 +24,5 @@ public interface BloodRegistryRepository extends JpaRepository<BloodRegistryEnti
             Area area,
             Integer pinCode
     );
-    Optional<BloodRegistryEntity> findByIdAndPinCode(
-            Long id,
-            Integer pinCode
-    );
+    List<BloodRegistryEntity> findAllByRequired(boolean required);
 }

@@ -30,16 +30,13 @@ export class UserProfileComponent implements OnInit {
       {
         next: (response: HttpResponse<UserEntity>) => {
           this.userEntity = response.body;
-          console.log(this.userEntity);
           this.userEntity!.gender = this.formatter.backToFront(this.userEntity!.gender, this.formatter.gender);
           this.userEntity!.bloodGroup = this.formatter.backToFront(this.userEntity!.bloodGroup, this.formatter.bloodGroup);
           this.userEntity!.state = this.formatter.backToFront(this.userEntity!.state, this.formatter.state);
           this.userEntity!.area = this.formatter.backToFront(this.userEntity!.area, this.formatter.area);
-          console.log(this.userEntity);
         },
         error: (e: HttpErrorResponse) => {
           if (e.status == 400) alert(e.headers.get("message"));
-          else console.log(e);
         }
       }
     );

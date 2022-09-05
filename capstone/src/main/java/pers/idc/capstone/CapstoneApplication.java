@@ -77,5 +77,14 @@ public class CapstoneApplication {
 		bloodRegistryEntity.setAvailable(false);
 		bloodRegistryEntity.setRequired(true);
 		bloodRegistryService.save(bloodRegistryEntity);
+
+		bloodRegistryEntity = new BloodRegistryEntity();
+		bloodRegistryEntity.setBloodGroup(AB_P);
+		bloodRegistryEntity.setState(STATE_A);
+		bloodRegistryEntity.setArea(AREA_1);
+		bloodRegistryEntity.setPinCode(123126);
+		bloodRegistryEntity.setAvailable(false);
+		bloodRegistryEntity.setRequired(true);
+		bloodRegistryService.save(bloodRegistryEntity);
 	}
 }

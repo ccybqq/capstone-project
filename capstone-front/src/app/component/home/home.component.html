@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="header">
+    <button type="submit" (click)="router.navigate(['login'])">Dashboard</button>
+    <h1>Home Page</h1>
+  </div>
+  <div class="review-container">
+    <div class="review-form" *ngIf="authService.isLoggedIn()">
+      <form (ngSubmit)="post()" ngNativeValidate>
+        <div class="r1">
+          <div class="r1-c1">
+            <label>Hospital: </label>
+            <input type="text" tabindex="1" name="hospital" [(ngModel)]="hospital" required>
+          </div>
+          <div class="r1-c2">
+            <label>City: </label>
+            <input type="text" tabindex="2" name="city" [(ngModel)]="city" required>
+          </div>
+          <div class="r1-c3">
+            <button type="submit" tabindex="4">Post</button>
+          </div>
+        </div>
+        <div class="r2">
+          <label>Review: </label>
+        </div>
+        <div class="r3">
+          <textarea class='review-message' type="text" tabindex="3" name="message" [(ngModel)]="message" required></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="reviews" *ngFor="let review of reviewArr">
+      <div class="review">
+        <div class="r1">
+          <div class="r1-c1">
+            <label>Hospital:</label>
+            {{ review.hospital }}
+          </div>
+          <div class="r1-c2">
+            <label>City: </label>
+            {{ review.city }}
+          </div>
+        </div>
+        <div class="r2">
+          <label>Review: </label>
+        </div>
+        <div class="r3">
+          {{ review.message }}
+        </div>
+      </div>
+    </div>
+    <div class="review-display"></div>
+  </div>
+  <div class="required-container">
+    <div class="required-header">
+      <h2>Requests</h2>
+    </div>
+    <div class="required" *ngFor="let required of requiredArr">
+      <div class="required-detail">
+        <div class="col1">
+          <div class="field">
+            <label>Blood Group:</label>
+            <div class="value">{{ formatter.backToFront(required.bloodGroup, formatter.bloodGroup) }}</div>
+          </div>
+        </div>
+        <div class="col2">
+          <div class="field">
+            <label>State:</label>
+            <div class="value">{{ formatter.backToFront(required.state, formatter.state) }}</div>
+          </div>
+          <div class="field">
+            <label>Area:</label>
+            <div class="value">{{ formatter.backToFront(required.area, formatter.area) }}</div>
+          </div>
+          <div class="field">
+            <label>PIN Code:</label>
+            <div class="value">{{ required.pinCode }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
