@@ -2,9 +2,9 @@ import { UserEntity } from '../object/user-entity';
 
 export interface BookingEntity {
     id: number | null,
-    userEntity: UserEntity,
+    email: string,
     city: string,
     hospital: string,
-    date: Date,
-    slot: string
+    date: Date | null,
+    bookingSlot: string
 }

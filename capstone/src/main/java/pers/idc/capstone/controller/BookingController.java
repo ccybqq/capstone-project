@@ -18,7 +18,7 @@ public class BookingController {
     private BookingService bookingService;
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_BASIC')")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<BookingEntity> book(@RequestBody BookingEntity bookingEntity) {
         try {
             return ResponseEntity.ok(bookingService.book(bookingEntity));

@@ -10,6 +10,7 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { BloodSearchComponent } from './component/blood-search/blood-search.component';
 import { HomeComponent } from './component/home/home.component';
+import { BookingComponent } from './component/booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HomeComponent } from './component/home/home.component';
     RegisterComponent,
     BloodSearchComponent,
     HomeComponent,
+    BookingComponent,
   ],
   imports: [
     BrowserModule,

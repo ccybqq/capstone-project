@@ -19,9 +19,7 @@ public class BookingEntity {
     @SequenceGenerator(name = "booking_entity_sequence", allocationSize = 1)
     @GeneratedValue(generator = "booking_entity_sequence", strategy = GenerationType.SEQUENCE)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "email", referencedColumnName = "email")
-    private UserEntity userEntity;
+    private String email;
     private String city;
     private String hospital;
     private Date date;

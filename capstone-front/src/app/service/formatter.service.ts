@@ -42,6 +42,16 @@ export class FormatterService {
     ]
   );
 
+  public bookingSlot = new Map(
+    [
+      ['SLOT_1', '9am - 10am'],
+      ['SLOT_2', '10am - 11am'],
+      ['SLOT_3', '1pm - 2pm'],
+      ['SLOT_4', '2pm - 3pm'],
+      ['SLOT_5', '3pm - 4pm']
+    ]
+  );
+
   constructor() { }
 
   frontToBack(value: string, map: Map<string, string>): string {

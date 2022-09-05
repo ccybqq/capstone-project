@@ -14,6 +14,7 @@ export class BookingService {
   book(bookingEntity: BookingEntity): Observable<HttpResponse<BookingEntity>> {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', localStorage.getItem('jwt') ?? '')
+    console.log(headers.get('Authorization'));
     return this.http.post<BookingEntity>(this.apiServerUrl, bookingEntity, { observe: 'response' })
   }
 

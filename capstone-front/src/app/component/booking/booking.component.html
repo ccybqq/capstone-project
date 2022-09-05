@@ -1,1 +1,47 @@
-<p>booking works!</p>
+<div class="container">
+  <div class="header">
+    <button type="submit" (click)="router.navigate(['login'])">Dashboard</button>
+    <h1>Booking</h1>
+  </div>
+  <div class="body">
+    <div *ngIf="isBookingSuccessful; then post; else pre"></div>
+    <ng-template #pre>
+      <div>
+        <form  class="booking-form" (ngSubmit)="book()" ngNativeValidate>
+          <div class="c1">
+            <div class="c1-r1">
+              <label>Hospital: </label><br>
+              <input type="text" tabindex="1" name="hospital" tabindex="1" [(ngModel)]="bookingEntity.hospital" required>
+            </div>
+            <div class="c1-r2">
+              <label>City: </label><br>
+              <input type="text" tabindex="2" name="city" tabindex="2" [(ngModel)]="bookingEntity.city" required>
+            </div>
+          </div>
+          <div class="c2">
+            <div class="c2-r1">
+              <label>Date: </label><br>
+              <input class="value" name="date" type="date" tabindex="3" [(ngModel)]="bookingEntity.date" required>    
+            </div>
+            <div class="c2-r2">
+              <label>Slot: </label><br>
+              <select class="value" name="bookingSlot" tabindex="4" [(ngModel)]="bookingEntity.bookingSlot" required>
+                <option *ngFor="let option of formatter.bookingSlot.values()" [value]="option">
+                  {{option}}
+                </option>
+              </select>
+            </div>
+            <div class="c2-r3">
+              <button type="submit">Donate</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+    <ng-template #post>
+      <div style="text-align:center; padding: 15px;">
+        Booking successful! You are going to save a life.
+      </div>
+    </ng-template>
+  </div>
+</div>
